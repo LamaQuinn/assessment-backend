@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+
+    <div class="div-container">
+      <!-- Part 1 -->
+      <h1>Random Fortune Generator</h1>
+      <button id="fortuneBtn">Get My Fortune</button>
+      <p id="fortuneText"></p>
+
+     <!-- Additional Features -->
+     <!-- Post -->
+      <input type="text" id="customFortuneInput" placeholder="Enter your custom fortune">
+      <button id="addFortuneBtn">Add Fortune</button>
+      <p id="customFortuneStatus"></p>
+
+<!-- Put -->
+      <select id="fortuneSelectUpdate">
+    <option  value="" selected disabled>Select a Fortune to Update</option>
+    <!-- Here, dynamically populate the list with the existing fortunes -->
+  </select>
+  <input type="text" id="updatedFortuneInput" placeholder="Enter the updated fortune">
+  <button id="updateFortuneBtn">Update Fortune</button>
+  <p id="updateFortuneStatus"></p>
+
+<!-- Delete -->
+      <select id="fortuneSelectDelete">
+        <option value="" selected disabled>Select a Fortune to Delete</option>
+        <!-- Here, dynamically populate the list with the existing fortunes -->
+      </select>
+      <button id="deleteFortuneBtn">Delete Fortune</button>
+      <p id="deleteFortuneStatus"></p>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./main.js"></script>
+    
+  </body>
+</html>
