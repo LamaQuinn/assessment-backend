@@ -26,35 +26,51 @@ const getCompliment = () => {
     });
 };
 
-function populateFortunesSelect(fortunes) {
-    fortuneSelectUpdate.innerHTML = ""
+// function populateFortunesSelect(fortunes) {
+//     fortuneSelectUpdate.innerHTML = ""
 
-    if (Array.isArray(fortunes)) {
-        fortunes.forEach((fortune) => {
-          const option = document.createElement("option");
-          option.value = fortune;
-          option.innerText = fortune;
-          fortuneSelectUpdate.appendChild(option);
-        // fortuneSelectDelete.appendChild(option)
-        });
-      } else if (typeof fortunes === "string") {
-        const option = document.createElement("option");
-        option.value = fortunes;
-        option.innerText = fortunes;
-        fortuneSelectUpdate.appendChild(option);
-        // fortuneSelectDelete.appendChild(option)
-      }
-  }
+//     if (Array.isArray(fortunes)) {
+//         fortunes.forEach((fortune) => {
+//           const option = document.createElement("option");
+//           option.value = fortune;
+//           option.innerText = fortune;
+//           fortuneSelectUpdate.appendChild(option);
+//         // fortuneSelectDelete.appendChild(option)
+//         });
+//       } else if (typeof fortunes === "string") {
+//         const option = document.createElement("option");
+//         option.value = fortunes;
+//         option.innerText = fortunes;
+//         fortuneSelectUpdate.appendChild(option);
+//         // fortuneSelectDelete.appendChild(option)
+//       }
+//   }
 
+function populateFortunesSelect(fortunes, selectElement) {
+    selectElement.innerHTML = "";
   
+    if (Array.isArray(fortunes)) {
+      fortunes.forEach((fortune) => {
+        const option = document.createElement("option");
+        option.value = fortune;
+        option.innerText = fortune;
+        selectElement.appendChild(option);
+      });
+    } else if (typeof fortunes === "string") {
+      const option = document.createElement("option");
+      option.value = fortunes;
+      option.innerText = fortunes;
+      selectElement.appendChild(option);
+    }
+  }
 
 const getFortuneMessage = ()=>{
     axios
         .get("http://localhost:4000/api/get-fortune")
         .then((res)=>{
             fortuneText.textContent=res.data
-            
-            populateFortunesSelect(res.data);
+            populateFortunesSelect(res.data, fortuneSelectUpdate);
+            populateFortunesSelect(res.data, fortuneSelectDelete)
         })
         .catch((err)=>{
             console.error(err)
@@ -138,13 +154,7 @@ deleteFortuneBtn.addEventListener("click", () => {
         deleteFortuneStatus.textContent = data.message;
         fortuneSelectDelete.value = "";
         // Refresh the fortune select options after deleting the fortune
-        axios.get("/get-fortune")
-          .then((res) => {
-            populateFortunesSelect(res.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching fortunes:", error);
-          });
+        
       })
       .catch((error) => {
         console.error("Error deleting fortune:", error);
